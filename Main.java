@@ -6,21 +6,22 @@ public class Main {
 
 
     private static void CrearReservas(){
-        boolean numPersonas;
+        int numPersonas;
         boolean fechaValida;
         String fechaReserva;
         String fechaSalida;
+        ArrayList habitaciones;
+        Reservas[]reservas=new Reservas[2];
         do {
             numPersonas= Validaciones.NumPersonas();
-        }while (!numPersonas);
+        }while (numPersonas<=0);
 
         do {
            fechaReserva= Validaciones.fechaReservaCorrecta(true);
            fechaSalida= Validaciones.fechaReservaCorrecta(false);
             fechaValida= Validaciones.SalidaMayorEntrada(fechaReserva , fechaSalida);
         }while (fechaValida=false);
-
-
+        habitaciones= Habitacion.habitacion(numPersonas, fechaReserva,fechaSalida,reservas);
     }
     public static void Menupreguntas(){
         Scanner sc =new Scanner(System.in);
@@ -44,11 +45,18 @@ public class Main {
             else {
                 if (opcionPregunta.length()==0 || opcionPregunta.equals(" ")){
                     System.out.println("escriba algo por favor ");
+
                 }
                 if (opcionPregunta.equals("1")){
                     String peguntaNueva;
                     System.out.println("añada preguntas ");
                     peguntaNueva=sc.nextLine();
+
+                    if (peguntaNueva.length()==0){
+                        System.out.println("debe contener algo");
+                        return;
+
+                    }
                     preguntas.add(peguntaNueva);
                     System.out.println("tendremos sus preguntas en cuenta");
                 }
@@ -84,6 +92,7 @@ public class Main {
             opcion=scan.nextLine();
 
 
+
                 switch (opcion) {
                     case "1":
                         System.out.println("************");
@@ -116,13 +125,16 @@ public class Main {
                                 System.out.println("código ");
                                 guardarCosas = scan.nextLine();
                                 guardarCosas=guardarCosas.trim();
-                                while (codprueba.equals(guardarCosas)){
+                                while (codprueba.equals(guardarCosas)) {
+
                                     System.out.println("1 Reservar habitación");
                                     System.out.println("2 Atención al cliente");
                                     System.out.println("3 pago online");
                                     System.out.println("4 salir");
-                                   opcion2=scan.nextLine();
-                                    switch (opcion2){
+                                    opcion2 = scan.nextLine();
+
+                                    switch (opcion2) {
+
 
                                         case "1":
                                             CrearReservas();
@@ -133,20 +145,19 @@ public class Main {
 
                                             break;
                                         case "3":
+                                            System.out.println("esta función no esta disponible");
 
                                             break;
-                                        case "4" :
+                                        case "4":
+
 
                                             break;
                                     }
 
 
-
-
                                     nose=true;
+                                    if (opcion2.equals("4"))break;
                                 }
-
-
                             }
                         }
                         break;

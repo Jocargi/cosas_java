@@ -435,24 +435,41 @@ public class Validaciones {
         }
         return frase;
     }
-    public static boolean NumPersonas(){
+    /**
+     *  Para lo que hace es comprobar el número de personas que van a hacer las reservas
+     * @return el numero de personas
+     */
+    public static int NumPersonas(){
         String personas="";
         Scanner sc=new Scanner(System.in);
 
             System.out.println("introduce el numero de personas deseado");
             personas=sc.nextLine();
+            if (personas.length()==0){
+                System.out.println("introduzca algo por favor");
+                return -1;
+            }
             for (int i = 0; i < personas.length(); i++) {
+
                 if (personas.charAt(i)< '0' || personas.charAt(i)> '9'  ){
                     System.out.println("deben ser solo números");
-                    return false;
+                    return -1;
 
                 }
 
             }
 
-        return true;
+        return Integer.parseInt(personas);
     }
+    //
 
+    /**
+     * Lo que hace esta función es comprobar que las fechas de las reservas sea correcta
+     * para que no puedan introducirse datos erróneos
+     * @param entrda
+     *
+     * @return la fecha correcta
+     */
     public static String fechaReservaCorrecta(boolean entrda) {
 
 
@@ -622,6 +639,12 @@ public class Validaciones {
         return fecha;
     }
 
+    /**
+     * esta función lo que hace es sumar los años y los meses para comprobar  que fecha es mas grande
+     * @param Numfechas
+     * @return
+     */
+
     public static int MesessumAnyos(int[] Numfechas){
 
         for (int i = 0; i <= Numfechas[1]; i++) {
@@ -631,13 +654,23 @@ public class Validaciones {
         return Numfechas[0];
     }
 
+    /**
+     *lo que hace esta función es convertir la fecha en numeros para operar mas facil con ella
+      * @param fecha
+     * @return fecha combertida en números
+     */
    public static int FechaNumero(String fecha){
 
         String fechas[]=fecha.split("/");
         int Numfechas[]={Integer.parseInt(fechas [0]) ,Integer.parseInt(fechas [1]), Integer.parseInt(fechas [2])};
         return MesessumAnyos(Numfechas);
    }
-   // hace que la salida no sea menor a la entrada
+
+    /**
+     * hace que la salida no sea menor a la entrada
+     * @param fechaEntrada
+     * @param fechaSalida
+     */
    public static boolean SalidaMayorEntrada(String fechaEntrada , String fechaSalida){
         int entrada = FechaNumero(fechaEntrada);
         int salida = FechaNumero(fechaSalida);
@@ -647,19 +680,21 @@ public class Validaciones {
         }
         return entrada<=salida;
    }
+
+    /**
+     * lo que hace esta función es comprobar que los datos introducidos sean solo numeros
+     * @param numeros
+     *
+     */
     public static boolean SoloNumeros( String numeros){
 
         for (int i = 0; i < numeros.length(); i++) {
+
             if (numeros.charAt(i)< '0' || numeros.charAt(i)> '9'  ){
                 System.out.println("deben ser solo números");
                 return false;
-
             }
-
         }
-
         return true;
     }
-
 }
-
