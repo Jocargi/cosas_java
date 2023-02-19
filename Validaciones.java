@@ -1,10 +1,11 @@
 package ProyectoFinal;
-
 import java.util.Scanner;
-
-
 public class Validaciones {
-    //Esta función lo que hace es que compruebe que el nombre sea correcto
+    /**
+     * Esta función lo que hace es que compruebe que el nombre y el apellido sea correcto
+     * @param nombre1
+     * @return el nombre y el apellido correctos
+     */
     public static String nombreYapellidoComprobar(boolean nombre1) {
 
         String nombre = "";
@@ -55,8 +56,10 @@ public class Validaciones {
         }
         return nombre;
     }
-
-    // esta función se encarga de comprobar que el correo este bien
+    /**
+     * Esta función se encarga de comprobar que el correo esté bien
+     * @return el correo correcto
+     */
     public static String comprobarCorreo() {
         String email = "";
         Scanner scan = new Scanner(System.in);
@@ -113,19 +116,17 @@ public class Validaciones {
                     System.out.println("el email no es válido ");
                 }
             }
-
         }
         return email;
     }
-
-
-    //revisa que el teléfono sea correcto
+    /**
+     * Lo que hace esta función es comprobar si el teléfono está bien escrito
+     * @return el teléfono correctamente
+     */
     public static String telefonoBien() {
-
         Scanner scan = new Scanner(System.in);
         String telefono = "";
         boolean telfValido = false;
-
         while (telfValido == false) {
             int numero = 0;
             System.out.println("teléfono: ");
@@ -175,9 +176,12 @@ public class Validaciones {
         }
         return telefono;
     }
-
+    /**
+     * Lo que hace esta función es comprobar que las fechas de nacimiento sea correcta
+     * para que no puedan introducirse datos erróneos
+     * @return la fecha correcta
+     */
     public static String fechaCorrecta() {
-
         boolean fechaBuena = false;
         String fecha = "";
         Scanner scan = new Scanner(System.in);
@@ -199,7 +203,6 @@ public class Validaciones {
             if (fecha.length() < 5) {
                 System.out.println("Fecha demasiado corta");
             } else {
-
                 //Comprueba que el formato es válido
                 if (fecha.length() > 5) {
                     for (int i = 0; i < fecha.length(); i++) {
@@ -216,13 +219,11 @@ public class Validaciones {
                                 barra2 = i;
                                 barras++;
                             }
-
                         } else {
                             System.out.println("Introduce únicamente números");
                             fechaBuena = false;
                             i = fecha.length() + 1;
                         }
-
                     }
                     //Comprueba que solo ponga 2 espacios
                     if (barras != 2 && fechaBuena) {
@@ -235,11 +236,9 @@ public class Validaciones {
                             dias = fecha.substring(0, 2);
                             diasint=Integer.parseInt(dias);
                             System.out.println(dias);
-
                         } else {
                             fechaBuena = false;
                             System.out.println("dia no valido");
-
                         }
                         if (fecha.substring(barra1 + 1, barra2).length() == 2 ) {
                             meses = fecha.substring(barra1 + 1, barra1 + 3);
@@ -251,14 +250,11 @@ public class Validaciones {
                         if (fecha.substring(barra2 + 1).length() == 4) {
                             anyos = fecha.substring(barra2 + 1);
                             anyo = Integer.parseInt(anyos);
-
                         } else {
                             System.out.println("año no valido");
                             fechaBuena = false;
                         }
                         if (fechaBuena) {
-
-
                             //Aquí comprueba que los meses sean correctos y su cantidad de dias
                             if (meses.charAt(0) == '1') {
                                 if (!(meses.charAt(1) >= '0' && meses.charAt(1) <= '2')) {
@@ -338,14 +334,14 @@ public class Validaciones {
         }
         return fecha;
     }
-
-
-
+    /**
+     * La frase de control se utiliza para generar una clave de seguridad
+     * @return el código ya generado
+     */
     public static String fraseControl() {
         String frase="";
         boolean fraseBien=false;
         Scanner scan = new Scanner(System.in);
-
         while (!fraseBien) {
             int espacio1 = 0;
             int espacio2 = 0;
@@ -437,7 +433,7 @@ public class Validaciones {
     }
     /**
      *  Para lo que hace es comprobar el número de personas que van a hacer las reservas
-     * @return el numero de personas
+     * @return el número de personas
      */
     public static int NumPersonas(){
         String personas="";
@@ -461,18 +457,13 @@ public class Validaciones {
 
         return Integer.parseInt(personas);
     }
-    //
-
     /**
      * Lo que hace esta función es comprobar que las fechas de las reservas sea correcta
      * para que no puedan introducirse datos erróneos
      * @param entrda
-     *
      * @return la fecha correcta
      */
     public static String fechaReservaCorrecta(boolean entrda) {
-
-
         boolean fechaBuena = false;
         String fecha = "";
         Scanner scan = new Scanner(System.in);
@@ -494,14 +485,11 @@ public class Validaciones {
             }else {
                 System.out.println("Fecha salida (dd/mm/aaaa) o  Fecha salida (dd-mm-aaaa: )");
             }
-
-
             fecha = scan.nextLine();
             fecha=fecha.trim();
             if (fecha.length() < 5) {
                 System.out.println("Fecha demasiado corta");
             } else {
-
                 //Comprueba que el formato es válido
                 if (fecha.length() > 5) {
                     for (int i = 0; i < fecha.length(); i++) {
@@ -640,11 +628,10 @@ public class Validaciones {
     }
 
     /**
-     * esta función lo que hace es sumar los años y los meses para comprobar  que fecha es mas grande
+     * Esta función lo que hace es sumar los años y los meses para comprobar que fecha es mas grande
      * @param Numfechas
      * @return
      */
-
     public static int MesessumAnyos(int[] Numfechas){
 
         for (int i = 0; i <= Numfechas[1]; i++) {
@@ -655,9 +642,9 @@ public class Validaciones {
     }
 
     /**
-     *lo que hace esta función es convertir la fecha en numeros para operar mas facil con ella
-      * @param fecha
-     * @return fecha combertida en números
+     *Lo que hace esta función es convertir la fecha en numeros para operar mas facil con ella
+     * @param fecha
+     * @return fecha convertida en números
      */
    public static int FechaNumero(String fecha){
 
@@ -665,9 +652,8 @@ public class Validaciones {
         int Numfechas[]={Integer.parseInt(fechas [0]) ,Integer.parseInt(fechas [1]), Integer.parseInt(fechas [2])};
         return MesessumAnyos(Numfechas);
    }
-
     /**
-     * hace que la salida no sea menor a la entrada
+     * Hace que la salida no sea menor a la entrada
      * @param fechaEntrada
      * @param fechaSalida
      */
@@ -676,15 +662,13 @@ public class Validaciones {
         int salida = FechaNumero(fechaSalida);
         if (!(entrada<=salida)){
             System.out.println("No puedes salir antes de entrar");
-
         }
         return entrada<=salida;
    }
 
     /**
-     * lo que hace esta función es comprobar que los datos introducidos sean solo numeros
+     * Lo que hace esta función es comprobar que los datos introducidos sean solo numeros
      * @param numeros
-     *
      */
     public static boolean SoloNumeros( String numeros){
 

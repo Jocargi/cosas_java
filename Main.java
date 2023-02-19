@@ -2,9 +2,13 @@ package ProyectoFinal;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
 public class Main {
 
-
+    /**
+     * Sirve para que el cliente pueda hacer una reserva
+     */
     private static void CrearReservas(){
         int numPersonas;
         boolean fechaValida;
@@ -20,24 +24,30 @@ public class Main {
            fechaReserva= Validaciones.fechaReservaCorrecta(true);
            fechaSalida= Validaciones.fechaReservaCorrecta(false);
             fechaValida= Validaciones.SalidaMayorEntrada(fechaReserva , fechaSalida);
-        }while (fechaValida=false);
+        }while (fechaValida==false);
         habitaciones= Habitacion.habitacion(numPersonas, fechaReserva,fechaSalida,reservas);
     }
+
+    /**
+     * Sirve para que cuando el cliente pulse la opción de atención al cliente
+     * muestre el menu
+     */
     public static void Menupreguntas(){
         Scanner sc =new Scanner(System.in);
-        System.out.println("***** PREGUNTAS FRECUENTES *****");
-        ArrayList <String> preguntas=new ArrayList<String>();
-        preguntas.add(" Salir");
-        preguntas.add(" Agregar preguntas");
-        preguntas.add(" ¿Cómo puedo llamar fuera del hotel con el teléfono de la habitación?");
-        preguntas.add(" ¿Es gratis la comida de la nevera de la habitación?");
-
-        for (int i = 0; i < preguntas.size(); i++) {
-            System.out.println(i + "." + preguntas.get(i));
-        }
         String opcionPregunta;
-
         do {
+            System.out.println("***** PREGUNTAS FRECUENTES *****");
+            ArrayList <String> preguntas=new ArrayList<String>();
+            preguntas.add(" Salir");
+            preguntas.add(" Agregar preguntas");
+            preguntas.add(" ¿Cómo puedo llamar fuera del hotel con el teléfono de la habitación?");
+            preguntas.add(" ¿Es gratis la comida de la nevera de la habitación?");
+
+            for (int i = 0; i < preguntas.size(); i++) {
+                System.out.println(i + "." + preguntas.get(i));
+            }
+
+
             System.out.println("Elige una opción del 0 al 3");
             opcionPregunta=sc.nextLine();
 
@@ -74,9 +84,6 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Habitacion> listadoHabitaciones=new ArrayList<>();
         Reservas[]reserva=new Reservas[2];
-
-
-
         Scanner scan=new Scanner(System.in);
         String opcion;
         String opcion2;
@@ -90,9 +97,6 @@ public class Main {
             System.out.println("0 salir");
             System.out.println("elige una opción:");
             opcion=scan.nextLine();
-
-
-
                 switch (opcion) {
                     case "1":
                         System.out.println("************");
@@ -149,6 +153,8 @@ public class Main {
 
                                             break;
                                         case "4":
+                                            System.out.println("Saliendo del sistema...");
+
 
 
                                             break;
@@ -166,5 +172,3 @@ public class Main {
         }
 
     }
-
-
