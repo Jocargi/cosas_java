@@ -1,6 +1,5 @@
 package ProyectoFinal;
 
-import java.util.ArrayList;
 
 public class Reservas {
     private String cod;
@@ -58,6 +57,4 @@ public class Reservas {
     public void setFecha_salida(String fecha_salida) {
         this.fecha_salida = fecha_salida;
     }
-
-
 }

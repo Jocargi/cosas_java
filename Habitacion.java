@@ -7,12 +7,12 @@ public class Habitacion {
     // Atributos
     private String id;
     private String nombre;
-   private String Descripcon;
-   private int num_camas;
-   private int max_personas;
-   private boolean banyera;
-   private double precio;
-   // Constructor
+    private String Descripcon;
+    private int num_camas;
+    private int max_personas;
+    private boolean banyera;
+    private double precio;
+    // Constructor
     public Habitacion(String id, String nombre, String descripcon, int num_camas, int max_personas, boolean banyera ,  double precio) {
         this.id = id;
         this.nombre = nombre;
@@ -22,7 +22,7 @@ public class Habitacion {
         this.banyera = banyera;
         this.precio=precio;
     }
-// Getter y setter
+    // Getter y setter
     public double getPrecio() {
         return precio;
     }
@@ -159,12 +159,17 @@ public class Habitacion {
                 }
             }
             double precioTotal = 0;
+            int maxPersonas=0;
             if (reservaValida) {
                 for (Habitacion habitacionNecesaria : opcion) {
                     habitacionNecesaria.mostrar();
                     precioTotal += habitacionNecesaria.getPrecio();
+                    maxPersonas += habitacionNecesaria.getMax_personas();
                 }
                 System.out.println("Precio Final: " + precioTotal);
+                if (maxPersonas<numPersonas){
+                    System.out.println("no hay capacidad necesaria en esta habitación");
+                }
             }
             System.out.println("");
 
@@ -174,15 +179,15 @@ public class Habitacion {
             System.out.println("Elige una habitación");
             numeros=sc.nextLine();
 
-                if (numeros.equals("0") || numeros.equals("1") ||numeros.equals("3") ||numeros.equals("4")){
-                    System.out.println("La habitación a sido reservada correctamente ");
-                    opciones=true;
-                }else {
-                    System.out.println("Debe elegir una opción disponible");
-                    opciones=false;
+            if (numeros.equals("0") || numeros.equals("1") ||numeros.equals("2") ||numeros.equals("3") ||numeros.equals("4")  ){
+                System.out.println("La habitación a sido reservada correctamente ");
+                opciones=true;
+            }else {
+                System.out.println("Debe elegir una opción disponible");
+                opciones=false;
 
 
-                }
+            }
 
 
         }while (!opciones);
