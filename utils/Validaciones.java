@@ -1,20 +1,32 @@
-package ProyectoFinal;
+package ProyectoFinal.utils;
+
 import java.util.Scanner;
+/**
+ * @author Jorge Carmona Girona
+ * @version 1.0
+ * @since 12/1/2023
+ * Es la clase que sirve para validar que todos los datos sean correctos
+ */
+
 public class Validaciones {
+
     /**
      * Esta función lo que hace es que compruebe que el nombre y el apellido sea correcto
-     * @param nombre1
+     *
+     *
      * @return el nombre y el apellido correctos
      */
-    public static String nombreYapellidoComprobar(boolean nombre1) {
+    public static String nombreYapellidoComprobar() {
 
         String nombre = "";
         boolean nombreBien = false;
         Scanner scan = new Scanner(System.in);
+        boolean noAp;
         //Aquí miramos que los caracteres sean de los rangos a-z A-Z
         while (nombreBien == false) {
-            if (nombre1){
+            if (noAp=true){
                 System.out.println("nombre: ");
+
             }else {
                 System.out.println("apellido: ");
             }
@@ -336,7 +348,7 @@ public class Validaciones {
     }
     /**
      * La frase de control se utiliza para generar una clave de seguridad
-     * @return el código ya generado
+     * @return el código de la frase de registro ya generado correctamente
      */
     public static String fraseControl() {
         String frase="";
@@ -647,7 +659,7 @@ public class Validaciones {
      * @return fecha convertida en números
      */
    public static int FechaNumero(String fecha){
-
+        fecha=fecha.replace('-','/');
         String fechas[]=fecha.split("/");
         int Numfechas[]={Integer.parseInt(fechas [0]) ,Integer.parseInt(fechas [1]), Integer.parseInt(fechas [2])};
         return MesessumAnyos(Numfechas);
@@ -656,6 +668,7 @@ public class Validaciones {
      * Hace que la salida no sea menor a la entrada
      * @param fechaEntrada
      * @param fechaSalida
+     *
      */
    public static boolean SalidaMayorEntrada(String fechaEntrada , String fechaSalida){
         int entrada = FechaNumero(fechaEntrada);
@@ -681,4 +694,5 @@ public class Validaciones {
         }
         return true;
     }
+
 }

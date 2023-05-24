@@ -1,16 +1,16 @@
-package ProyectoFinal;
+package ProyectoFinal.models;
 
 
 public class Reservas {
     private String cod;
     private String id_cliente;
-    private String id_habitacion;
+    private Habitacion id_habitacion;
     private String fecha_entrada;
     private String fecha_salida;
 
     public Reservas() {}
 
-    public Reservas(String cod, String id_cliente, String id_habitacion, String fecha_entrada, String fecha_salida) {
+    public Reservas(String cod, String id_cliente, Habitacion id_habitacion, String fecha_entrada, String fecha_salida) {
         this.cod = cod;
         this.id_cliente = id_cliente;
         this.id_habitacion = id_habitacion;
@@ -34,11 +34,11 @@ public class Reservas {
         this.id_cliente = id_cliente;
     }
 
-    public String getId_habitacion() {
+    public Habitacion getId_habitacion() {
         return id_habitacion;
     }
 
-    public void setId_habitacion(String id_habitacion) {
+    public void setId_habitacion(Habitacion id_habitacion) {
         this.id_habitacion = id_habitacion;
     }
 
@@ -56,5 +56,8 @@ public class Reservas {
 
     public void setFecha_salida(String fecha_salida) {
         this.fecha_salida = fecha_salida;
+    }
+
+    public void setId_habitacion(String id) {
     }
 }
