@@ -1,9 +1,11 @@
 package ProyectoFinal.controllers;
 
 import ProyectoFinal.models.Cliente;
+import ProyectoFinal.utils.Main;
 import ProyectoFinal.utils.Validaciones;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -34,34 +36,39 @@ public class GestorClientes {
      *
      */
 
-    public static void generarClientesBase() {
-
-        listadoCliente.add(new Cliente("Atonio","Box Sanchez","12345678C", "a@a.es" , "999333222", "12/12/2004" , "AAA123"));
-        listadoCliente .add(new Cliente("Pepito","Garcia Box","12345678C","s@s.es" , "999333222", "12/12/2004" , "AAA123"));
-        listadoCliente.add(new Cliente("Sergio","Manrresa Bernabeu","12345678C", "e@e.es" , "999333222", "12/12/2004" , "AAA123"));
-        listadoCliente.add(new Cliente("Jorge","Pelegrin Bru","12345678C", "f@f.es" , "999333222", "12/12/2004" , "AAA123"));
-        listadoCliente.add(new Cliente("Miguel","Sivila Mora","12345678C", "d@d.es" , "999333222", "12/12/2004" , "AAA123"));
-        listadoCliente.add(new Cliente("Iker","Berna Morales","12345678C","i@i.es" , "999333222", "12/12/2004" , "AAA123"));
-        listadoCliente.add(new Cliente("Juan","Martinez Perez","12345678C","d@t.es" , "999333222", "12/12/2004" , "AAA123"));
-        listadoCliente.add(new Cliente("Pepe","Martinez Perez","12345678C","e@t.es" , "999333222", "12/12/2004" , "AAA123"));
-        listadoCliente.add(new Cliente("Alexis","Martinez Perez","12345678C","s@t.es" , "999333222", "12/12/2004" , "AAA123"));
-
+    public static void generarClientes() {
         try {
-            FileInputStream fi=new FileInputStream("./ProyectoFinal/data/cliente.txt");
-            ObjectInputStream oi=new ObjectInputStream(fi);
-            while (true){
-                Cliente cliente=(Cliente)oi.readObject();
+            FileInputStream clienteFis = new FileInputStream("data/cliente.dat");
+            ObjectInputStream clienteOis = new ObjectInputStream(clienteFis);
+            while (true) {
+                Cliente cliente = (Cliente) clienteOis.readObject();
                 agregarClientes(cliente);
             }
 
-        }catch (IOException exception){
-
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException eofException) {
+            
 
         }
-
-
     }
+
+
+    public static void eliminarCliente(String correo) {
+        Cliente clienteEncontrado = null;
+        for (Cliente cliente : listadoCliente) {
+            if (correo.equals(cliente.getEmail())) {
+                clienteEncontrado = cliente;
+                break;
+            }
+        }
+
+        if (clienteEncontrado != null) {
+            listadoCliente.remove(clienteEncontrado);
+            System.out.println("Cliente eliminado correctamente.");
+        } else {
+            System.out.println("Cliente no encontrado.");
+        }
+    }
+
 
     /**
      * sirve para mostrar la información básica del cliente
@@ -82,12 +89,23 @@ public class GestorClientes {
     public static Cliente buscarCliente(String correo) {
         for (Cliente listadoCliente : listadoCliente ) {
             if (correo.equals(listadoCliente.getEmail())){
-
                 return listadoCliente;
             }
         }
         System.out.println("cliente no encontrado");
         return null;
+    }
+
+
+    public static void ActualizarCliente(String correo) {
+        for (int i=0;i<listadoCliente.size(); i++ ) {
+            if (correo.equals(listadoCliente.get(i).getEmail())){
+
+                listadoCliente.set(i, Main.crearCliente());
+            }
+        }
+        System.out.println("cliente no encontrado");
+
     }
 
     /**

@@ -1,7 +1,9 @@
 package ProyectoFinal.models;
 
 
-public class Reservas {
+import java.io.Serializable;
+
+public class Reservas implements Serializable {
     private String cod;
     private String id_cliente;
     private Habitacion id_habitacion;

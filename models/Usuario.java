@@ -1,16 +1,17 @@
 package ProyectoFinal.models;
 
-public class Ususario {
+import java.io.Serializable;
 
+public class Usuario implements Serializable {
     String nombreUsuario;
- String password;
- String email;
- boolean rol ;
+    String password;
+    String email;
+    boolean rol ;
 
-    public Ususario() {
+    public Usuario() {
     }
 
-    public Ususario(String nombreUsuario, String password, String email, boolean rol) {
+    public Usuario(String nombreUsuario, String password, String email, boolean rol) {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
         this.email = email;
@@ -47,5 +48,9 @@ public class Ususario {
 
     public void setRol(boolean rol) {
         this.rol = rol;
+    }
+
+    public String formatearObjeto(){
+        return nombreUsuario + ";" + password + ";" + email + ";" + rol + "\r";
     }
 }

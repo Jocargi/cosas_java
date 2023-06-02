@@ -1,13 +1,18 @@
 package ProyectoFinal.controllers;
 
+import ProyectoFinal.Exception.ArchivoNoEncontrado;
+import ProyectoFinal.models.Cliente;
 import ProyectoFinal.models.Habitacion;
 import ProyectoFinal.models.Reservas;
 import ProyectoFinal.utils.Validaciones;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class GestorReserevas {
-
+static ArrayList<Reservas[]> listadoReservas=new ArrayList<>();
 
 
 
@@ -45,20 +50,41 @@ public class GestorReserevas {
 
 
         }
+        listadoReservas.add(reservas);
+
+        try {
+
+            FileOutputStream reservasFos = new FileOutputStream("./ProyectoFinal/data/reservas.txt");
+            ObjectOutputStream reservasOos= new ObjectOutputStream(reservasFos);
+
+            for (Cliente cliente: GestorClientes.getListadoCliente()) {
+                reservasOos.writeObject(cliente);
+            }
+            throw new ArchivoNoEncontrado("lo siento no encontrmos el archivo");
+        } catch (ArchivoNoEncontrado ar){
+            System.out.println(ar.getMessage());
+
+        } catch (IOException e){
+
+        }
 
     }
-    static Reservas[] listadoReservas;
 
-    public GestorReserevas(Reservas[] listadoReservas) {
+
+
+
+
+
+    public GestorReserevas(ArrayList<Reservas[]> listadoReservas) {
         this.listadoReservas = listadoReservas;
     }
 
-    public static Reservas[] getListadoReservas() {
+    public static ArrayList<Reservas[]> getListadoReservas() {
         return listadoReservas;
     }
 
 
-    public void setListadoReservas(Reservas[] listadoReservas) {
+    public void setListadoReservas(ArrayList<Reservas[]> listadoReservas) {
         this.listadoReservas = listadoReservas;
     }
 }

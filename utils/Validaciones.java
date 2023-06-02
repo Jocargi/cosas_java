@@ -1,5 +1,7 @@
 package ProyectoFinal.utils;
 
+import ProyectoFinal.Exception.FechaNoValidaException;
+
 import java.util.Scanner;
 /**
  * @author Jorge Carmona Girona
@@ -16,15 +18,15 @@ public class Validaciones {
      *
      * @return el nombre y el apellido correctos
      */
-    public static String nombreYapellidoComprobar() {
+    public static String nombreYapellidoComprobar(boolean noAp) {
 
         String nombre = "";
         boolean nombreBien = false;
         Scanner scan = new Scanner(System.in);
-        boolean noAp;
+
         //Aquí miramos que los caracteres sean de los rangos a-z A-Z
         while (nombreBien == false) {
-            if (noAp=true){
+            if (noAp==true){
                 System.out.println("nombre: ");
 
             }else {
@@ -72,6 +74,58 @@ public class Validaciones {
      * Esta función se encarga de comprobar que el correo esté bien
      * @return el correo correcto
      */
+
+    public static String nomHabitacion(boolean nomDes){
+        String nombre = "";
+        boolean nombreBien = false;
+        Scanner scan = new Scanner(System.in);
+
+        //Aquí miramos que los caracteres sean de los rangos a-z A-Z
+        while (nombreBien == false) {
+            if (nomDes==true){
+                System.out.println("nombre: ");
+
+            }else {
+                System.out.println("descripción: ");
+            }
+            nombre = scan.nextLine();
+            nombre=nombre.trim();
+            nombre = nombre.toUpperCase();
+            for (int i = 0; i < nombre.length(); i++) {
+                if (nombre.charAt(i) >= 'a' && nombre.charAt(i) <= 'z') {
+                    nombreBien = true;
+                } else if (nombre.charAt(i) >= 'A' && nombre.charAt(i) <= 'Z') {
+                    nombreBien = true;
+                } else if ((nombre.charAt(i) == 'Ó')
+                        || (nombre.charAt(i) == 'Á') || (nombre.charAt(i) == 'É')
+                        || (nombre.charAt(i) == 'Í') || (nombre.charAt(i) == 'Ú') || (nombre.charAt(i) == 'Ç')
+                        || (nombre.charAt(i) >= 128 && nombre.charAt(i) <= 144)
+                        || (nombre.charAt(i) >= 147 && nombre.charAt(i) <= 154)
+                        || (nombre.charAt(i) >= 160 && nombre.charAt(i) <= 167)
+                        || (nombre.charAt(i) >= 181 && nombre.charAt(i) <= 183)
+                        || (nombre.charAt(i) >= 210 && nombre.charAt(i) <= 216)
+                        || (nombre.charAt(i) >= 226 && nombre.charAt(i) <= 237
+                        || nombre.charAt(i) == 'ñ'  && nombre.charAt(i) == 'Ñ' )) {
+                    nombreBien=true;
+                } else if (nombre.charAt(i) == ' ') {
+                    nombreBien = true;
+
+                } else {
+                    System.out.println("no valido");
+                    nombreBien = false;
+                    i = nombre.length();
+                }
+                //Aquí obligamos a que el nombre no empiece por espacios y que no lo dejen vacío
+            }
+            if (nombre.length() < 1) {
+                System.out.println("no valido ");
+
+                nombreBien = false;
+
+            }
+        }
+        return nombre;
+    }
     public static String comprobarCorreo() {
         String email = "";
         Scanner scan = new Scanner(System.in);
@@ -475,7 +529,9 @@ public class Validaciones {
      * @param entrda
      * @return la fecha correcta
      */
+
     public static String fechaReservaCorrecta(boolean entrda) {
+
         boolean fechaBuena = false;
         String fecha = "";
         Scanner scan = new Scanner(System.in);
@@ -621,7 +677,7 @@ public class Validaciones {
                                     } else {
                                         if (((dias.charAt(0) == '2' && dias.charAt(1) <= '8') || dias.charAt(0) > '2')) {
                                             fechaBuena = false;
-                                            System.out.println("fecha no válida");
+                                            System.out.println("fecha no valida");
                                         }
                                     }
                                 }
@@ -630,7 +686,7 @@ public class Validaciones {
                     }
                 } else {
                     fechaBuena = false;
-                    System.out.println("Formato de fecha no válido");
+
                 }
 
             }
@@ -694,5 +750,47 @@ public class Validaciones {
         }
         return true;
     }
+    public static String nomUsuario() {
+
+        String nombre = "";
+        boolean nombreBien = false;
+        Scanner scan = new Scanner(System.in);
+
+        //Aquí miramos que los caracteres sean de los rangos a-z A-Z
+        while (nombreBien == false) {
+            System.out.println("introduce el nombre de ususaro");
+
+            nombre = scan.nextLine();
+            nombre=nombre.trim();
+
+            for (int i = 0; i < nombre.length(); i++) {
+                if (nombre.charAt(i) >= 'a' && nombre.charAt(i) <= 'z') {
+                    nombreBien = true;
+                } else if (nombre.charAt(i) >= 'A' && nombre.charAt(i) <= 'Z') {
+                    nombreBien = true;
+                } else if (nombre.charAt(i) == ' ') {
+                    nombreBien =false;
+
+                } else if (nombre.charAt(i) >= 9 && nombre.charAt(i) <= 1) {
+                    nombreBien=true;
+
+                } else {
+                    System.out.println("no valido");
+                    nombreBien = false;
+                    i = nombre.length();
+                }
+                //Aquí obligamos a que el nombre no empiece por espacios y que no lo dejen vacío
+            }
+            if (nombre.length() < 1) {
+                System.out.println("no valido ");
+
+                nombreBien = false;
+
+            }
+        }
+        return nombre;
+    }
+
+
 
 }

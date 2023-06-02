@@ -1,4 +1,5 @@
 package ProyectoFinal.models;
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * @author Jorge Carmona Girona
@@ -6,16 +7,18 @@ import java.util.ArrayList;
  * @since 12/1/2023
  * Es la clase que sirve para generar habitaciones
  */
-public class Habitacion {
+public class Habitacion implements Serializable {
     // Atributos
-    private String id;
-    private String nombre;
-    private String Descripcon;
-    private int num_camas;
-    private int max_personas;
-    private boolean banyera;
-    private double precio;
+    public String id;
+    public String nombre;
+    public String Descripcon;
+    public int num_camas;
+    public int max_personas;
+    public boolean banyera;
+    public double precio;
     // Constructor
+
+
 
     /**
      *
@@ -27,6 +30,8 @@ public class Habitacion {
      * @param banyera
      * @param precio
      */
+
+
     public Habitacion(String id, String nombre, String descripcon, int num_camas, int max_personas, boolean banyera ,  double precio) {
         this.id = id;
         this.nombre = nombre;
@@ -36,6 +41,9 @@ public class Habitacion {
         this.banyera = banyera;
         this.precio=precio;
     }
+
+
+
     // Getter y setter
     public double getPrecio() {
         return precio;
@@ -105,19 +113,7 @@ public class Habitacion {
                 '}');
     }
 
-    /**
-     * Sirve para gestionar los datos de Las habitaciones
-     * @param listadoHabitaciones
-     */
 
-    public static void GestorDeDatos(ArrayList<Habitacion> listadoHabitaciones) {
-        listadoHabitaciones.add(new Habitacion("v777","Vege","vistas a la casa willy",4,5,true,77.7));
-        listadoHabitaciones.add(new Habitacion("a192","wii","vistas a las montañas",3,4,true, 53.90));
-        listadoHabitaciones.add(new Habitacion("a193","capi","vistas a las montañas",2,2,false , 60.80));
-        listadoHabitaciones.add(new Habitacion("a194","bara","vistas a las montañas",3,5,false,2.00 ));
-        listadoHabitaciones.add(new Habitacion("a195","Viva","vistas a  España",5,7,true,100.0));
-        listadoHabitaciones.add(new Habitacion("a199","VivaLaVida","vistas a  España",2,2,true,100.0));
-    }
 
 
 }

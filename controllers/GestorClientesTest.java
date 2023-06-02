@@ -22,16 +22,16 @@ class GestorClientesTest {
     }
 
 
-    @Test
-    void generarClientesBase() {
-        int longitudInicial= GestorClientes.listadoCliente.size();
-        GestorClientes.generarClientesBase();
-        assertAll(
-                ()-> assertEquals(longitudInicial+9, GestorClientes.listadoCliente.size())
+    //@Test
+   // void generarClientesBase() {
+     //   int longitudInicial= GestorClientes.listadoCliente.size();
+       // GestorClientes.cargarClientes();
+        //assertAll(
+          //      ()-> assertEquals(longitudInicial+9, GestorClientes.listadoCliente.size())
 
-        );
+        //);
 
-    }
+            //}
 
     @Test
     void mostrarClientes() {

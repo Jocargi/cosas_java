@@ -1,22 +1,24 @@
 package ProyectoFinal.models;
+
+import java.io.Serializable;
+
 /**
  * @author Jorge Carmona Girona
  * @version 1.0
  * @since 12/1/2023
  * Es la clase que sirve para generar clientes
  */
-public class Cliente extends Ususario{
+public class Cliente extends Usuario implements Serializable {
 
 
-    public Cliente(String nombre, String apellidos, String dni, String email, String telefono, String fecha_nacimiento, boolean rol, String codigo_de_Acceso) {
+    public Cliente(String nombre, String apellidos, String dni, String email, String telefono, String fecha_nacimiento, String rol) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;
         this.email = email;
         this.telefono = telefono;
         this.fecha_nacimiento = fecha_nacimiento;
-        this.rol = rol;
-        Codigo_de_Acceso = codigo_de_Acceso;
+
     }
 
     public Cliente(String nombreUsuario, String password, String email, boolean rol, String nombre, String apellidos, String dni, String email1, String telefono, String fecha_nacimiento, boolean rol1, String codigo_de_Acceso) {
@@ -46,6 +48,7 @@ public class Cliente extends Ususario{
         private String email;
         private String telefono;
         private String fecha_nacimiento;
+        private  String nomUsuario;
         private boolean rol=false;
 
         private String Codigo_de_Acceso;
@@ -56,16 +59,19 @@ public class Cliente extends Ususario{
             this.dni = dni;
         }
 
-        public Cliente(String nombre, String apellidos, String dni, String email, String telefono, String fecha_nacimiento, String código_de_Acceso) {
-            this.nombre = nombre;
-            this.apellidos = apellidos;
-            this.dni = dni;
-            this.email = email;
-            this.telefono = telefono;
-            this.fecha_nacimiento = fecha_nacimiento;
-            this.Codigo_de_Acceso = Codigo_de_Acceso;
-        }
-        //Getter y setter
+    public Cliente(String nombre, String apellidos, String dni, String email, String telefono, String fecha_nacimiento, String nomUsuario, boolean rol, String codigo_de_Acceso) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.dni = dni;
+        this.email = email;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.nomUsuario = nomUsuario;
+        this.rol = rol;
+        Codigo_de_Acceso = codigo_de_Acceso;
+    }
+
+    //Getter y setter
 
         public String getNombre() {
             return nombre;
