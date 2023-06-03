@@ -1,6 +1,6 @@
 package ProyectoFinal.models;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 /**
  * @author Jorge Carmona Girona
  * @version 1.0
@@ -105,15 +105,18 @@ public class Habitacion implements Serializable {
     /**
      * Sirve para mostrar el nombre, el maximo de personas y el precio de cada habitación
      */
-    public void mostrar() {
-        System.out.println("Habitacion{" +
-                "nombre='" + nombre + '\'' +
+
+
+    @Override
+    public String toString() {
+        return "Habitacion{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", Descripcon='" + Descripcon + '\'' +
+                ", num_camas=" + num_camas +
                 ", max_personas=" + max_personas +
+                ", banyera=" + banyera +
                 ", precio=" + precio +
-                '}');
+                '}';
     }
-
-
-
-
 }

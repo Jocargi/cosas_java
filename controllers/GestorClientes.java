@@ -46,7 +46,7 @@ public class GestorClientes {
             }
 
         } catch (IOException | ClassNotFoundException eofException) {
-            
+
 
         }
     }
@@ -57,7 +57,7 @@ public class GestorClientes {
         for (Cliente cliente : listadoCliente) {
             if (correo.equals(cliente.getEmail())) {
                 clienteEncontrado = cliente;
-                break;
+
             }
         }
 

@@ -102,6 +102,42 @@ public class Administrador extends Usuario implements Serializable {
         } while (!opcion.equals("0"));
     }
 
+    public static void menuAdministradoresReservas(){
+        String opcion = "";
+        do {
+            System.out.println("------ MENÚ DE GESTIÓN  ------");
+            System.out.println("1. Listado reservas ");
+            System.out.println("2. eliminar reservas");
+            System.out.println("0. Salir del sistema");
+
+            System.out.print("Elija una opción: ");
+
+
+            Scanner sc=new Scanner(System.in);
+
+
+            try{
+                opcion = sc.nextLine();
+            }catch (InputMismatchException e){
+                System.out.println("a");
+            }
+
+
+            switch (opcion) {
+                case "1":
+
+
+                    break;
+                case "2":
+
+
+                    break;
+
+            }
+
+        } while (!opcion.equals("0"));
+    }
+
 
 
     public static void menuAdministradoresCliente() {
@@ -113,7 +149,7 @@ public class Administrador extends Usuario implements Serializable {
             System.out.println("2. Consultar cliente");
             System.out.println("3. Actualizar cliente");
             System.out.println("4. Eliminar cliente");
-            System.out.println("5. salir del programa");
+            System.out.println("0. salir del programa");
 
             System.out.print("Elija una opción: ");
 
@@ -166,7 +202,7 @@ public class Administrador extends Usuario implements Serializable {
 
             }
 
-        } while (!opcion.equals("5"));
+        } while (!opcion.equals("0"));
     }
 
 
@@ -180,7 +216,7 @@ public class Administrador extends Usuario implements Serializable {
             System.out.println("2. Consultar habitación");
             System.out.println("3. Actualizar habitación");
             System.out.println("4. Eliminar habitación");
-            System.out.println("5. salir del programa");
+            System.out.println("0. salir del programa");
         ;
             System.out.print("Elija una opción: ");
 
@@ -197,16 +233,26 @@ public class Administrador extends Usuario implements Serializable {
 
             switch (opcion) {
                 case "1":
-                    GestorHabitaciones.crearHabitaciones();
+                    Habitacion habitacion=GestorHabitaciones.crearHabitaciones();
+                    if (habitacion!=null){
+                        GestorHabitaciones.getListadoHanitaciones().add(habitacion);                    }
+
 
 
 
 
                     break;
                 case "2":
-                    System.out.println("inserte el código de la habitación");
-                    String idC=sc.nextLine();
-                    GestorHabitaciones.buscarHabitacion(idC);
+                    try {
+                        System.out.println("inserte el código de la habitación");
+                        String idC=sc.nextLine();
+                        System.out.println(GestorHabitaciones.buscarHabitacion(idC).toString());
+
+                    }catch (NullPointerException n){
+                        System.out.println("fsd");
+
+                    }
+
 
 
                     break;
@@ -227,7 +273,7 @@ public class Administrador extends Usuario implements Serializable {
 
 
                     break;
-                case "5":
+                case "0":
                     System.out.println("saliendo del menu");
                     break;
 
@@ -235,7 +281,7 @@ public class Administrador extends Usuario implements Serializable {
 
             }
 
-        } while (!opcion.equals("5"));
+        } while (!opcion.equals("0"));
     }
 
 }

@@ -28,8 +28,9 @@ public class GestorHabitaciones implements BuscarHabitaciones {
     static ArrayList<Habitacion> opcion= new ArrayList<>();
     public static ArrayList habitacion(int numPersonas , String fechaParaEntrar, String fechaParaSalir, Reservas[] reservas){
         Scanner sc=new Scanner(System.in);
-        ArrayList <Habitacion> opcionHabitaciones = opcion;
+        ArrayList <Habitacion> opcionHabitaciones = listadoHabitaciones;
         String numeros;
+
 
         int fechaEntrada= Validaciones.FechaNumero(fechaParaEntrar);
         int fechaSalida= Validaciones.FechaNumero(fechaParaSalir);
@@ -63,24 +64,27 @@ public class GestorHabitaciones implements BuscarHabitaciones {
                     break;
                 }
 
-                    if (Validaciones. FechaNumero(reserva.getFecha_entrada()) >= fechaEntrada &&
-                            Validaciones. FechaNumero(reserva.getFecha_entrada()) >= fechaSalida) {
-                        reservaValida = false;
-                        break;
-                    } else if (Validaciones. FechaNumero(reserva.getFecha_salida()) >= fechaEntrada &&
-                            Validaciones. FechaNumero(reserva.getFecha_salida()) >= fechaSalida) {
-                        reservaValida = false;
-                        break;
-                    }
+                if (Validaciones. FechaNumero(reserva.getFecha_entrada()) >= fechaEntrada &&
+                        Validaciones. FechaNumero(reserva.getFecha_entrada()) >= fechaSalida) {
+                    reservaValida = false;
+                    break;
+                } else if (Validaciones. FechaNumero(reserva.getFecha_salida()) >= fechaEntrada &&
+                        Validaciones. FechaNumero(reserva.getFecha_salida()) >= fechaSalida) {
+                    reservaValida = false;
+                    break;
+                }
 
             }
             double precioTotal = 0;
             int maxPersonas=0;
+            String descripcion="";
             if (reservaValida) {
                 for (Habitacion habitacionNecesaria : opcion) {
-                    habitacionNecesaria.mostrar();
+                    habitacionNecesaria.toString();
                     precioTotal += habitacionNecesaria.getPrecio();
                     maxPersonas += habitacionNecesaria.getMax_personas();
+                    descripcion+= habitacionNecesaria.getDescripcon();
+
                 }
                 System.out.println("Precio Final: " + precioTotal);
                 if (maxPersonas<numPersonas){
@@ -92,10 +96,12 @@ public class GestorHabitaciones implements BuscarHabitaciones {
         }
         //Aquí eliges la opción que tu quieras
         do {
+
             System.out.println("Elige una habitación");
             numeros=sc.nextLine();
 
-            if (numeros.equals("0") || numeros.equals("1") ||numeros.equals("2") ||numeros.equals("3") ||numeros.equals("4")||numeros.equals("5")||numeros.equals("6")||numeros.equals("7")||numeros.equals("8") ){
+
+            if (numeros.equals("0") || numeros.equals("1") ||numeros.equals("2") ||numeros.equals("3") ||numeros.equals("4")||numeros.equals("5")||numeros.equals("6")||numeros.equals("7")||numeros.equals("8" ) || numeros.equals("9" ) ){
                 System.out.println("La habitación a sido reservada correctamente ");
                 opciones=true;
             }else {
@@ -109,7 +115,7 @@ public class GestorHabitaciones implements BuscarHabitaciones {
 
         return opcionHabitaciones;
     }
-    static ArrayList<Habitacion> listadoHanitaciones = new ArrayList<>();
+    static ArrayList<Habitacion> listadoHabitaciones = new ArrayList<>();
 
     public static Habitacion crearHabitaciones(){
         Scanner entrada= new Scanner(System.in);
@@ -220,10 +226,9 @@ public class GestorHabitaciones implements BuscarHabitaciones {
                 opcionValida=false;
             }
         }while (!opcionValida);
-        listadoHanitaciones.add(new Habitacion(id,nombre,descripcon,numCamas,max_personas,banyera,precio));
 
 
-        return null;
+        return new Habitacion(id,nombre,descripcon,numCamas,max_personas,banyera,precio);
     }
 
 
@@ -238,7 +243,7 @@ public class GestorHabitaciones implements BuscarHabitaciones {
             ObjectInputStream oi=new ObjectInputStream(fi);
             while (true){
                 Habitacion habitacion=(Habitacion) oi.readObject();
-                listadoHanitaciones.add(habitacion);
+                listadoHabitaciones.add(habitacion);
 
             }
         }catch (IOException exception){
@@ -249,20 +254,26 @@ public class GestorHabitaciones implements BuscarHabitaciones {
         }
     }
 
-    public static void ActualizarHabitacion (String id) {
-        for (int i=0;i<listadoHanitaciones.size(); i++ ) {
-            if (id.equals(listadoHanitaciones.get(i).getId())){
 
-                listadoHanitaciones.set(i, crearHabitaciones());
+    public static void ActualizarHabitacion (String id) {
+        try {
+            for (int i=0;i<listadoHabitaciones.size(); i++ ) {
+                if (id.equals(listadoHabitaciones.get(i).getId())){
+
+                    listadoHabitaciones.set(i, crearHabitaciones());
+                }
             }
+
+        }catch (Exception e){
+            System.out.println("cliente no encontrado");
         }
-        System.out.println("cliente no encontrado");
+
 
     }
 
 
     public static ArrayList<Habitacion> getListadoHanitaciones() {
-        return listadoHanitaciones;
+        return listadoHabitaciones;
     }
 
     public static void mostrarHabitaciones(Habitacion[] listadoHabitaciones) {
@@ -274,29 +285,43 @@ public class GestorHabitaciones implements BuscarHabitaciones {
 
 
     public static Habitacion buscarHabitacion(String id) {
-        for(Habitacion listadoHabitacion : listadoHanitaciones ) {
-            if (id.equals(listadoHabitacion.getId())){
-                return listadoHabitacion;
+        try {
+            for(Habitacion listadoHabitacion : listadoHabitaciones ) {
+                if (id.equals(listadoHabitacion.getId())){
+                    return listadoHabitacion;
+                }
             }
+
+
+        }catch (Exception e){
+            System.out.println("Habitación no encontrada");
+            return null;
+
         }
-        System.out.println("Habitación no encontrada");
+
         return null;
     }
 
     public static void eliminarHabitaciones(String id) {
-        Habitacion habitacionEncontrada = null;
-        for (Habitacion habitacion : listadoHanitaciones) {
-            if (id.equals(habitacion.getId())) {
-                habitacionEncontrada = habitacion;
-                break;
-            }
-        }
+        try {
+            Habitacion habitacionEncontrada = null;
+            for (Habitacion habitacion : listadoHabitaciones) {
+                if (id.equals(habitacion.getId())) {
+                    habitacionEncontrada = habitacion;
 
-        if (habitacionEncontrada != null) {
-            listadoHanitaciones.remove(habitacionEncontrada);
-            System.out.println("habitación eliminada correctamente.");
-        } else {
-            System.out.println("habitación no encontrada.");
+                }
+            }
+
+            if (habitacionEncontrada != null) {
+                listadoHabitaciones.remove(habitacionEncontrada);
+                System.out.println("habitación eliminada correctamente.");
+            } else {
+
+            }
+
+        }catch (Exception e){
+            System.out.println("habitación no encontrada.");;
         }
     }
+
 }

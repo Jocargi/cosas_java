@@ -42,7 +42,7 @@ public class Main {
 
             }
 
-        } while (opcionPago == "3");
+        } while (opcionPago.equals("3") );
 
 
     }
